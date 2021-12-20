@@ -1,0 +1,69 @@
+body {
+    background-color: red;
+}
+/* @media print {
+    body {
+        font-size: 10pt;
+    }
+}
+@media screen {
+    body {
+        font-size: 10pt;
+    }
+} */
+.conclase {    
+    /* color: yellow; */
+}
+
+#identificador {
+    /* color: red; */
+    margin-block-start: 2em;
+}
+
+.error {
+    color: white;
+}
+
+.rojo {
+    color: red;
+    
+}
+p {
+    color: blue;
+}
+
+body > p {
+    color: red;
+}
+
+.formulario p {
+    color: magenta;
+   
+}
+
+h1 + p {
+    font-size: 2em;
+}
+
+.formulario h1 {
+    font-style: italic;
+}
+
+.listado p {
+    color: aquamarine;
+   
+}
+
+.listado h1 {
+    font-size: small;
+}
+
+/* @media print {
+    input[type="button"] {
+        display: none;
+    }
+    input {
+        border-style: none;
+
+    }
+} */
