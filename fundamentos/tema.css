@@ -150,13 +150,20 @@ h1 + p {
     padding: 10px;
   }
   
-  .grid-container > div {
+  /* .grid-container > div, .grid-container > header, .grid-container > nav, .grid-container > main ,.grid-container > aside,.grid-container > footer  { */
+  .grid-container > *  {
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 20px 0;
     font-size: 30px;
   }
-
+  .grid-container > header {
+    grid-area: header;
+  }
+  .grid-container > nav {
+      grid-area: menu;
+  }
+  .kk { color: rebeccapurple;}
   .grid-container-colum {
     display: grid;
     grid-template-columns: 20% 40% 20% 20%;
