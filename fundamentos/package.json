@@ -1,5 +1,19 @@
 {
+  "name": "fundamentos",
+  "version": "1.0.0",
+  "description": "Ejemplos del fundamentos web",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx eslint",
+    "test": "karma",
+    "lint": "npx eslint"
+  },
+  "author": "Javier",
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0"
   }
 }
