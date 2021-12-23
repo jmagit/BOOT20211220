@@ -77,6 +77,13 @@ https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter/4.0.0
 
 ## Proyecto final
 
+### Modelo
+
+- Pizza: nombre, foto, ingredientes, comentarios (no requerido), precio (SUM(Precio_Ingredientes) +20%(Beneficios)), base, salsa.
+- Ingrediente: nombre, tipo (base, salsa y otros) y precio.
+- Comentario: texto, puntuación, fecha, usuario y pizza.
+- Usuario: email, nombre, apellidos y contraseña.
+
 ### Back End
 
 - Microservicio: Catalogo
