@@ -30,6 +30,8 @@ Sgúen etsduios raleziaods por la Uivenrsdiad ignlsea de Cmdibrage, no ipmotra e
 
 Cuaquleir tetxo se pduee leer... si se respetan la primera y la última letra de cada palabra
 
+[El Tutorial de JavaScript Moderno](https://es.javascript.info/)
+
 ### Ejercicios
 
 #### Sintaxis y funciones
@@ -105,7 +107,7 @@ https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter/4.0.0
 
 - Aplicación Angular: Pizza Web
   - Anonimos: Consultar la carta
-  - Autenticados: Consultar la carta, dejar comentarios, *hacer pedidos, modificar o cancelar pedidos, consultar pedido*.
+  - Autenticados: Consultar la carta, dejar comentarios, *hacer pedidos, modificar o cancelar pedidos, consultar situación del pedido, ver historial de pedidos*.
   - Personal (Autenticados): Mantener pizzas e ingredientes, *consultar pedidos, cambiar estado pedido*.
   - Administradores (Autenticados): Mantener usuarios.
 - Con bateria de pruebas
