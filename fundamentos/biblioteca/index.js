@@ -1,1 +1,1 @@
-export { primosGenerator, primosIterator } from './util/generadores.js'
+export { primosGenerator, primosIterator } from './otra/generadores.js'
