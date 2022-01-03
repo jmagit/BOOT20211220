@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +7,59 @@
     <title>Ejercicios</title>
 </head>
 <body>
-    <script src="ejercicios.js"></script>
-    <script>
-        var nom = prompt("Dime nombre:")
-        console.log(saluda(nom))
+    <h1>Ejercicios</h1>
+    <!-- <script src="ejercicios.js"></script> -->
+    <script type="module">
+        import Juego, { aleatorio, JuegoDelNumero, dameArray, damePrimos, 
+            esNIF, esPalindromo, JuegoConClase, damePrimosGenerator, damePrimosIterator } from './ejercicios.js';
+
+        // var nom = prompt("Dime nombre:")
+        // console.log(saluda(nom))
         // alert(saluda(nom))
+
+        console.log(aleatorio(1, 100))
+//        JuegoDelNumero();
+        console.log(dameArray(10))
+        console.log(dameArray(10, -1, 1, 2, 3))
+        console.log(damePrimos(10))
+        console.log(damePrimosGenerator(10))
+        console.log(damePrimosIterator(10))
+        let casos = ['12345678z', '12345678Z', '1234S', '1234J', '12345678', 'Z']
+        casos.forEach(caso => 
+            console.log(`${caso} ${esNIF(caso)? 'ES': 'NO ES'} un NIF valido`)
+            )
+        casos = ['ana', 'reconocer', 'La ruta nos aporto otro paso natural', 'SOMOS O NO SOMOS',
+            'Dábale arroz a la zorra el abad', 'áéíóúüuuoiea', 'a¿¡+-*!?\'"a',
+            'No subas, abusón', '¿Será lodo o dólares?',
+            'Este no lo es'
+        ]
+        casos.forEach(caso => 
+            console.log(`${caso} ${esPalindromo(caso)? 'ES': 'NO ES'} un palíndromo`)
+            )
+        
+        // var juego = new Juego(10, 100);
+        // // var juego = new JuegoConClase(10, 100);
+        // do {
+        //     do {
+        //         var numeroLeido = prompt(`Dame tu número ${juego.intentos + 1} de ${juego.DameMaxIntentos()}:`);
+        //         if (numeroLeido === null)
+        //             break;
+        //         if (isNaN(parseInt(numeroLeido))) {
+        //             alert('No es un número valido');
+        //             continue;
+        //         }
+        //         try {
+        //             juego.PruebaCon(+numeroLeido);
+        //         } catch (error) {
+        //             alert('ERROR: ' + error.message + '\n' + juego.mensaje)
+        //             break;
+        //         }
+        //         alert(juego.mensaje);
+        //     } while (juego.intentos < 10 && !juego.encontrado);
+        //     if (!confirm('¿Otra?'))
+        //         break;
+        //     juego.Inicializa();
+        // } while (true);
     </script>
 </body>
 </html>
