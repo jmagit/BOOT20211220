@@ -8,16 +8,50 @@
 </head>
 <body>
     
-    <script src="demos.js"></script>
-    <script src="demos1.js"></script>
-    <script>
-        (function() {
-            var algo = fichero;
-            let otro = kk();
-            // ...
+    <!-- <script src="demos.js"></script>
+    <script src="demos1.js"></script> -->
+    <script type="module">
+        import * as modulo from './modulo1.js'
+        import { name, NAME } from './modulo2.js'
+        import { name as name1 } from './modulo1.js'
 
-        })();
+        //alert(modulo.NAME)
+        modulo.name();
+        modulo.OtroName();
+        //modulo.estaEsInterna()
+        name()
+        name1()
+        // alert(JSON.stringify(modulo))
+        let lst = JSON.parse(` [
+      {
+         "precision": "zip",
+         "Latitude":  37.7668,
+         "Longitude": -122.3959,
+         "City":      "SAN FRANCISCO",
+         "State":     "CA",
+         "Zip":       "94107"
+      },
+      {
+         "precision": "zip",
+         "Latitude":  37.371991,
+         "Longitude": -122.026020,
+         "City":      "SUNNYVALE",
+         "State":     "CA",
+         "Zip":       "94085",
+         "p": 0
+      }
+   ]
+`)
+for(let c of lst)
+      console.log(c.City)
+        // (function() {
+        //     var algo = fichero;
+        //     let otro = kk();
+        //     // ...
 
+        // })();
+lst[0].State = "Murcia"
+console.log(JSON.stringify(lst))
     </script>
 </body>
 </html>
