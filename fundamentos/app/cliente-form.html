@@ -29,16 +29,16 @@
     <main>
         <form id="miForm" class="form form--col4">
             <label for="customer_id">Código</label>
-            <input type="number" id="customer_id" name="customer_id" placeholder="Código del usuario" required data-label="otro"><output
-                class="error-msg" id="customer_idErr" hidden></output>
+            <input type="number" id="customer_id" name="customer_id" placeholder="Código del usuario" required min="0"
+                data-label="otro"><output class="error-msg" id="customer_idErr" hidden></output>
             <label for="store_id">Tienda</label>
             <select id="store_id" name="store_id">
                 <option value="1">Tienda 1</option>
                 <option value="2">Tienda 2</option>
             </select>
             <label for="first_name">Nombre</label>
-            <input class="colspan-3" type="text" id="first_name" name="first_name" required minlength="2"
-                maxlength="50" data-label="Nombre"><output class="error-msg" id="first_nameErr" hidden></output>
+            <input class="colspan-3" type="text" id="first_name" name="first_name" required minlength="2" maxlength="10"
+                value="0123456789123" data-label="Nombre"><output class="error-msg" id="first_nameErr" hidden></output>
             <label for="last_name">Apellidos</label>
             <input class="colspan-3" type="text" id="last_name" name="last_name" minlength="2" maxlength="50"><output
                 class="error-msg" id="last_nameErr" hidden></output>
@@ -62,7 +62,7 @@
             <input type="text" id="nif" name="nif" required minlength="2"><output class="error-msg" id="nifErr"
                 hidden></output>
             <div class="form__command">
-                <input id="btnEnviar" type="button" value="enviar">
+                <input id="btnEnviar" type="submit" value="enviar">
                 <input type="button" value="volver">
             </div>
         </form>
@@ -74,6 +74,37 @@
                 href="/politica-de-cookies" target="_blank">Política de Cookies</a>
         </div>
     </footer>
+
+    <script>
+        function esNIF(nif) {
+            if (!/^\d{1,8}[A-Za-z]$/.test(nif))
+                return false;
+            const letterValue = nif.substr(nif.length - 1);
+            const numberValue = nif.substr(0, nif.length - 1);
+            return letterValue.toUpperCase() === LETRAS_DEL_NIF.charAt(numberValue % 23);
+        }
+        document.querySelector('#nif').addEventListener('change', function (ev) {
+            if(ev.target.value) {
+                if (esNIF(ev.target.value)) {
+                    ev.target.setCustomValidity('');
+                } else {
+                    ev.target.setCustomValidity('No es un NIF valido');
+                }
+            } else {
+                ev.target.setCustomValidity('');
+            }
+        });
+
+        document.querySelectorAll('input').forEach(cntr => cntr.addEventListener('change', function (ev) {
+            let cmp = `#${ev.target.name}Err`
+            const out = document.querySelector(cmp)
+            if (out) {
+                out.textContent = ev.target.validationMessage;
+                out.hidden = ev.target.checkValidity();
+            }
+        }));
+
+    </script>
 </body>
 
 </html>

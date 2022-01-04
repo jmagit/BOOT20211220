@@ -14,6 +14,7 @@
         import * as modulo from './modulo1.js'
         import { name, NAME } from './modulo2.js'
         import { name as name1 } from './modulo1.js'
+        modulo.falsaGlobal = "algo"
 
         //alert(modulo.NAME)
         modulo.name();
@@ -52,6 +53,26 @@ for(let c of lst)
         // })();
 lst[0].State = "Murcia"
 console.log(JSON.stringify(lst))
+
+    // function list() {
+    //     return new Promise((resolve, reject) => {
+    //         this.http.get(baseUrl).subscribe( 
+    //             data => resolve(data),  
+    //             err => reject(err) 
+    //             )
+    //     });
+    // }
+
+    // list().then(data => calcula()).then();
+    // console.log('Precipitado')
+    // calcula()
+
+    // async function conEsperas() {
+    //     let data = await list()
+    //     await calcula()
+    //     console.log('Calculado')
+    // }
+    
     </script>
 </body>
 </html>

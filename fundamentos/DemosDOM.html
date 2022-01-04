@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demos DOM</title>
+</head>
+
+<body>
+    <h1>Ejemplos DOM</h1>
+    <div>
+        <p class="estilo" data-mia="page" data-color="green">Uno</p>
+        <p>Dos</p>
+        <p class="estilo" data-mia="client" data-color="blue">Tres</p>
+    </div>
+    <output id="cotilla"></output>
+    <input type="text" value="algo">
+    <div role="button" id="btn" class="estilo">Botón</div>
+    <input type="button" value="otro">
+    <p>
+        <input id="btnInc" type="button" value="Sube">
+        <input id="btnDec" type="button" value="Baja">
+    </p>
+    <script>
+        class Contador {
+            constructor(init, pinta) {
+                this.contador = init;
+                this.pinta = typeof(pinta) === "function" ? pinta : null;
+            }
+            inc() { 
+                this.contador++
+                this.onPinta(this.contador)
+            }
+            dec() { 
+                this.contador--
+                this.onPinta(this.contador)
+            }
+            onPinta(value) {
+                if(typeof(this.pinta) === "function")
+                    this.pinta(value)
+            }
+        }
+
+        //document.querySelector('H1').style = "color: red"
+        // for(let p of document.querySelectorAll('P'))
+        //     p.style = "color: red"
+        for (let p of document.querySelectorAll('div .estilo')) {
+            p.style = "color: red"
+            p.addEventListener('mouseover', controladorCotilla)
+            p.addEventListener('click', ev => {
+            console.log('soy un párrafo');
+            if (ev.target.dataset.mia === 'page')
+                ev.stopPropagation()
+        })
+        }
+        // document.querySelector('#btn').style = "color: red"
+        // document.querySelector('#btn').hidden = true
+        document.querySelector('[type=button]').focus();
+        let cotilla = document.querySelector('#cotilla');
+        let btn = document.querySelector('#btn');
+        btn.style = "color: red"
+        btn.addEventListener('click', ev => {
+            for (let p of document.querySelectorAll('div .estilo'))
+                p.hidden = !p.hidden
+        })
+        function controlador(ev) {
+            alert('Funciona')
+            ev.target.removeEventListener('click', controlador)
+        }
+        function controladorCotilla(ev) {
+            //cotilla.textContent = `x: ${ev.pageX} y: ${ev.pageY}`
+            if (ev.target.dataset.mia === 'page')
+                cotilla.innerHTML = `page <b>x:</b> ${ev.pageX} <b>y:</b> ${ev.pageY}`
+            else
+                cotilla.innerHTML = `client <b>x:</b> ${ev.clientX} <b>y:</b> ${ev.clientY}`
+            if (ev.target.dataset.color)
+                ev.target.style = `color: ${ev.target.dataset.color}`
+        }
+
+        btn.addEventListener('click', controlador)
+        document.querySelector('[type=button]').addEventListener('click', controlador)
+        document.querySelector('[type=button]').addEventListener('click', ev => {
+            cotilla.innerHTML = document.querySelector('[type=text]').value;
+        })
+        document.querySelector('body').addEventListener('click', ev => {
+            console.log('soy el body');
+        })
+        document.querySelector('div').addEventListener('click', ev => {
+            console.log('soy el primer div');
+            ev.stopPropagation()
+        })
+
+        let cont = new Contador(10, data => console.log(`Contador: ${data}`))
+        document.querySelector('#btnInc').addEventListener('click', ev => {
+            cont.inc();
+        })
+        document.querySelector('#btnDec').addEventListener('click', ev => {
+            cont.dec();
+        })
+        cont.pinta = value => cotilla.innerHTML = `<b>Contador:</b> ${value}`
+        
+    </script>
+</body>
+
+</html>
