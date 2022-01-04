@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos AJAX</title>
+</head>
+
+<body>
+    <h1>Ejemplos</h1>
+    <p>
+        <input type="button" value="1">
+        <input type="button" value="2">
+        <input type="button" value="3">
+    </p>
+    <div id="rslt"></div>
+
+    <script>
+        function pide(page) {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4)
+                    if (xmlhttp.status == 200) {
+                        let lst = JSON.parse(xmlhttp.responseText);
+                        let msg = '<ul>';
+                        for (let item of lst) {
+                            msg += `<li>${item.author}</li>`
+                        }
+                        msg += `</ul>`
+                        document.querySelector('#rslt').innerHTML = msg;
+                    } else {
+                        alert(xmlhttp.statusText)
+                    }
+            };
+            xmlhttp.open('get', `https://picsum.photos/v2/list?page=${page - 1}&limit=10`)
+            xmlhttp.send()
+        }
+
+        for (let p of document.querySelectorAll('input')) {
+            p.addEventListener('click', ev => {
+                pide(ev.target.value);
+            })
+        }
+
+    </script>
+</body>
+
+</html>
