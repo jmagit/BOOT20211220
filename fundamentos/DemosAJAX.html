@@ -49,13 +49,41 @@
             document.querySelector('#rslt').hidden = true;
             document.querySelector('#loading').hidden = false;
         }
+        function pideFecth(page) {
+            document.querySelector('#rslt').hidden = true;
+            document.querySelector('#loading').hidden = false;
+            fetch(`https://picsum.photos/v2/list?page=${page}&limit=10`).then(function (response) {
+                if (response.ok) {
+                    response.json().then(lst => {
+                        let msg = '<ul>';
+                        for (let item of lst) {
+                            msg += `<li>${item.id} ${item.author}</li>`
+                        }
+                        msg += `</ul>`
+                        document.querySelector('#rslt').innerHTML = msg;
+                        //document.querySelector('#raw').textContent = xmlhttp.responseText;
+                        document.querySelector('#rslt').hidden = false;
+                    }).catch(function (error) {
+                        console.error('Error en los datos recibidos: ' + error.message);
+                    });
+                } else {
+                    console.error('Error ' + response.status + ': ' + response.statusText);
+                }
+                document.querySelector('#loading').hidden = true;
+            }).catch(function (error) {
+                console.error('Hubo un problema con la petición Fetch:' + error.message);
+                document.querySelector('#loading').hidden = true;
+            });
+        }
 
         for (let p of document.querySelectorAll('input')) {
             p.addEventListener('click', ev => {
-                pide(ev.target.value);
+                // pide(ev.target.value);
+                pideFecth(ev.target.value);
             })
         }
-        pide(1)
+        //pide(1)
+        pideFecth(1);
     </script>
 </body>
 
