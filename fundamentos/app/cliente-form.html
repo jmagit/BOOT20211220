@@ -27,7 +27,7 @@
         </form>
     </header>
     <main>
-        <form id="miForm" class="form form--col4">
+        <form id="miForm" name="miForm" class="form form--col4">
             <label for="customer_id">Código</label>
             <input type="number" id="customer_id" name="customer_id" placeholder="Código del usuario" required min="0"
                 data-label="otro"><output class="error-msg" id="customer_idErr" hidden></output>
@@ -59,7 +59,7 @@
             <label for="last_update">Última modificacion</label>
             <input type="date" id="last_update" name="last_update">
             <label for="nif">DNI</label>
-            <input type="text" id="nif" name="nif" required minlength="2"><output class="error-msg" id="nifErr"
+            <input type="text" id="nif" name="nif"  minlength="2"><output class="error-msg" id="nifErr"
                 hidden></output>
             <div class="form__command">
                 <input id="btnEnviar" type="submit" value="enviar">
@@ -77,32 +77,54 @@
 
     <script>
         function esNIF(nif) {
+            const LETRAS_DEL_NIF = 'TRWAGMYFPDXBNJZSQVHLCKE'
             if (!/^\d{1,8}[A-Za-z]$/.test(nif))
                 return false;
             const letterValue = nif.substr(nif.length - 1);
             const numberValue = nif.substr(0, nif.length - 1);
             return letterValue.toUpperCase() === LETRAS_DEL_NIF.charAt(numberValue % 23);
         }
-        document.querySelector('#nif').addEventListener('change', function (ev) {
-            if(ev.target.value) {
-                if (esNIF(ev.target.value)) {
-                    ev.target.setCustomValidity('');
-                } else {
-                    ev.target.setCustomValidity('No es un NIF valido');
-                }
-            } else {
-                ev.target.setCustomValidity('');
-            }
-        });
 
-        document.querySelectorAll('input').forEach(cntr => cntr.addEventListener('change', function (ev) {
-            let cmp = `#${ev.target.name}Err`
-            const out = document.querySelector(cmp)
-            if (out) {
-                out.textContent = ev.target.validationMessage;
-                out.hidden = ev.target.checkValidity();
+        function validacion() {
+            const form = document.forms.namedItem('miForm');
+            for (let item of form.elements) {
+                switch (item.name) {
+                    case 'nif':
+                        if (item.value && !esNIF(item.value)) {
+                            item.setCustomValidity('No es un NIF valido');
+                        } else {
+                            item.setCustomValidity('');
+                        }
+                        break;
+                }
+                const out = document.querySelector(`#${item.name}Err`)
+                if (out) {
+                    out.textContent = item.validationMessage;
+                    out.hidden = item.checkValidity();
+                }
             }
+            document.querySelector('#btnEnviar').disabled = !form.checkValidity()
+        }
+        // document.querySelector('#nif').addEventListener('change', function (ev) {
+        //     if (ev.target.value && !esNIF(ev.target.value)) {
+        //         ev.target.setCustomValidity('No es un NIF valido');
+        //     } else {
+        //         ev.target.setCustomValidity('');
+        //     }
+        // });
+
+        // document.querySelectorAll('input').forEach(cntr => cntr.addEventListener('change', function (ev) {
+        //     let cmp = `#${ev.target.name}Err`
+        //     const out = document.querySelector(cmp)
+        //     if (out) {
+        //         out.textContent = ev.target.validationMessage;
+        //         out.hidden = ev.target.checkValidity();
+        //     }
+        // }));
+        document.querySelectorAll('input').forEach(cntr => cntr.addEventListener('change', function (ev) {
+            validacion()
         }));
+        validacion()
 
     </script>
 </body>
