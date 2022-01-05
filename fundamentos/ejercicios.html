@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>Ejercicios</title>
 </head>
 <body>
     <h1>Ejercicios</h1>
+
+    <form id="miForm" >
+        <label for="txtNumero" id="lbPrompt" hidden></label>
+        <input type="number" name="numero" id="txtNumero" hidden required>
+        <button id="btnJugar">Empezar</button>
+        <output id="txtMensaje"></output>
+    </form>
+
     <!-- <script src="ejercicios.js"></script> -->
     <script type="module">
         import Juego, { aleatorio, JuegoDelNumero, dameArray, damePrimos, 
-            esNIF, esPalindromo, JuegoConClase, damePrimosGenerator, damePrimosIterator } from './ejercicios.js';
+            esNIF, esPalindromo, JuegoConClase, damePrimosGenerator, damePrimosIterator } from './js/ejercicios.js';
 
         // var nom = prompt("Dime nombre:")
         // console.log(saluda(nom))
@@ -24,10 +33,10 @@
         // console.log(damePrimos(100))
         // console.log(damePrimosGenerator(100))
         // console.log(damePrimosIterator(100))
-        let casos = ['12345678z', '12345678Z', '1234S', '1234J', '4g', '12345678', 'Z', 'Z12345678']
-        casos.forEach(caso => 
-            console.log(`${caso} ${esNIF(caso)? 'ES': 'NO ES'} un NIF valido`)
-            )
+        // let casos = ['12345678z', '12345678Z', '1234S', '1234J', '4g', '12345678', 'Z', 'Z12345678']
+        // casos.forEach(caso => 
+        //     console.log(`${caso} ${esNIF(caso)? 'ES': 'NO ES'} un NIF valido`)
+        //     )
         // casos = ['ana', 'reconocer', 'La ruta nos aporto otro paso natural', 'SOMOS O NO SOMOS',
         //     'Dábale arroz a la zorra el abad', 'áéíóúüuuoiea', 'a¿¡+-*!?\'"a',
         //     'No subas, abusón', '¿Será lodo o dólares?',
@@ -61,6 +70,59 @@
         //         break;
         //     juego.Inicializa();
         // } while (true);
+
+        (function () {
+            var juego = new Juego(10, 100);
+            let lbPrompt = document.querySelector('#lbPrompt')
+            let txtNumero = document.querySelector('#txtNumero')
+            let btnJugar = document.querySelector('#btnJugar')
+            let txtMensaje = document.querySelector('#txtMensaje')
+
+            function Empezar(ev) {
+                juego.Inicializa();
+                lbPrompt.textContent = `Dame tu número ${juego.intentos + 1} de ${juego.DameMaxIntentos()}:`
+                lbPrompt.hidden = false;
+                txtNumero.hidden = false;
+                // txtNumero.focus()
+                txtMensaje.textContent = null
+                btnJugar.textContent = 'Probar'
+                btnJugar.removeEventListener('click', Empezar)
+                ev.preventDefault()
+            }
+            btnJugar.addEventListener('click', Empezar)
+
+            document.forms.miForm.addEventListener('submit', ev => {
+                ev.preventDefault()
+                txtMensaje.className = ` ${txtMensaje.className} `.replace(' errorMsg ', '')
+                // if (txtNumero.value < 0) {
+                //     // txtMensaje.className = ' errorMsg'
+                //     // txtMensaje.textContent = 'no es un número valido'
+                //     txtNumero.setCustomValidity('no es un número valido')
+                //     return
+                // }
+                try {
+                    txtMensaje.textContent = juego.PruebaCon(+txtNumero.value);
+                    lbPrompt.textContent = `Dame tu número ${juego.intentos + 1} de ${juego.DameMaxIntentos()}:`
+                } catch (error) {
+                    txtMensaje.className = ' errorMsg'
+                    txtMensaje.textContent = error.message
+                }
+                if (juego.intentos >= 10 || juego.encontrado) {
+                    lbPrompt.hidden = true;
+                    txtNumero.hidden = true;
+                    btnJugar.textContent = 'Empezar'
+                    btnJugar.addEventListener('click', Empezar)
+                }
+            })
+            txtNumero.addEventListener('change', function (ev) {
+                if (ev.target.value < 0) {
+                    ev.target.setCustomValidity('no es un número valido');
+                } else {
+                    ev.target.setCustomValidity('');
+                }
+            });
+        })()
+
     </script>
 </body>
 </html>

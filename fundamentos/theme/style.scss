@@ -1,0 +1,100 @@
+@use "sass:list";
+$sizes: 576px, 768px, 992px, 1200px;
+
+.Calculadora {
+  @mixin tamañoFont($factor: 0.3em) {
+    @for $delta from 0 to list.length($sizes) {
+      @media (min-width: list.nth($sizes, $delta + 1)) {
+        font-size: 1em + ($delta + 1) * $factor !important;
+      }
+    }
+  }
+  $fuente: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+
+  background-color: #e6f3ff !important;
+  border-style: outset !important;
+  padding: 6px !important;
+  margin: 4px !important;
+  max-width: 100%;
+  min-width: 150px;
+  font: $fuente;
+
+  @for $delta from 1 to list.length($sizes) {
+    @media (min-width: list.nth($sizes, $delta + 1)) {
+      max-width: 300px + $delta * 200px;
+    }
+  }
+
+  .Pantalla {
+    grid-column: 1 / span 4;
+    background-color: #004000;
+    color: yellow;
+    border-style: inset !important;
+    text-align: right !important;
+    padding: 4px !important;
+    @include tamañoFont(1em);
+    word-wrap: break-word;
+  }
+
+  .Resumen {
+    grid-column: 1 / span 4;
+    text-align: right !important;
+    @include tamañoFont(0.7em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @mixin botones {
+    width: 100%;
+    font: $fuente;
+    @include tamañoFont;
+  }
+
+  .btnDigito {
+    color: navy;
+    @include botones;
+  }
+
+  .btnOperar {
+    color: red;
+    @include botones;
+  }
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    grid-column: $i;
+  }
+  @if $i < 12 {
+    @for $s from 2 through 13 - $i {
+      .col-#{$i}x#{$s} {
+        grid-column: $i #{"/"} span $s;
+      }
+    }
+  }
+}
+@for $s from 2 through 12 {
+  .colspan-#{$s} {
+    grid-column: span $s;
+  }
+}
+
+@for $i from 1 through 20 {
+  .row-#{$i} {
+    grid-row: $i;
+  }
+  @for $s from 2 through 21 - $i {
+    .row-#{$i}x#{$s} {
+      grid-row: $i #{"/"} span $s;
+    }
+  }
+}
+@for $s from 2 through 2 {
+  .rowpan-#{$s} {
+    grid-row: span $s;
+  }
+}
