@@ -112,7 +112,7 @@
                 let msg = '<ul>';
                 for (let item of lst) {
                     msg += `<li>${item.id} ${item.author}</li>`
-                    // msg += `<li><img class="miniatura" src="${item.download_url}"> ${item.id} ${item.author}</li>`
+                    msg += `<li><img class="miniatura" src="${item.download_url}"> ${item.id} ${item.author}</li>`
                 }
                 msg += `</ul>`
                 document.querySelector('#rslt').innerHTML = msg;
