@@ -6,20 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplos AJAX</title>
+    <style>
+        .ajax-wait div {
+        position: fixed;
+        background-color: black;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        }
+        .ajax-wait img {
+        position: fixed;
+        left: 45%;
+        top: 45%;
+        width: 10%;
+        height: auto;
+        opacity: 1;
+        }
+        .miniatura {
+            max-width: 100px;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Ejemplos</h1>
     <p>
-        <input type="button" value="1">
-        <input type="button" value="2">
-        <input type="button" value="3">
+        <input class="paginas" type="button" value="1">
+        <input class="paginas" type="button" value="2">
+        <input class="paginas" type="button" value="3">
     </p>
-    <div style="background-color: aqua; width: 100%; height: 100%;" id="loading" hidden="true">
+    <div class="ajax-wait" id="loading" hidden="true">
+        <div></div>
         <img src="loading.gif">
     </div>
     <div id="rslt"></div>
     <div id="raw"></div>
+    <p>
+        <input class="fotos" type="button" value="jpeg">
+        <input class="fotos" type="button" value="png">
+        <input class="fotos" type="button" value="webp">
+    </p>
+    <img id="foto">
 
     <script>
         function pide(page) {
@@ -61,7 +90,6 @@
                         }
                         msg += `</ul>`
                         document.querySelector('#rslt').innerHTML = msg;
-                        //document.querySelector('#raw').textContent = xmlhttp.responseText;
                         document.querySelector('#rslt').hidden = false;
                     }).catch(function (error) {
                         console.error('Error en los datos recibidos: ' + error.message);
@@ -75,15 +103,48 @@
                 document.querySelector('#loading').hidden = true;
             });
         }
+        async function pideAsync(page) {
+            document.querySelector('#rslt').hidden = true;
+            document.querySelector('#loading').hidden = false;
+            const response = await fetch(`https://picsum.photos/v2/list?page=${page}&limit=10`);
+            if (response.ok) {
+                const lst = await response.json();
+                let msg = '<ul>';
+                for (let item of lst) {
+                    msg += `<li>${item.id} ${item.author}</li>`
+                    // msg += `<li><img class="miniatura" src="${item.download_url}"> ${item.id} ${item.author}</li>`
+                }
+                msg += `</ul>`
+                document.querySelector('#rslt').innerHTML = msg;
+                document.querySelector('#rslt').hidden = false;
+            } else {
+                console.error('Error ' + response.status + ': ' + response.statusText);
+            }
+            document.querySelector('#loading').hidden = true;
+        }
 
-        for (let p of document.querySelectorAll('input')) {
+        for (let p of document.querySelectorAll('.paginas')) {
             p.addEventListener('click', ev => {
                 // pide(ev.target.value);
-                pideFecth(ev.target.value);
+                // pideFecth(ev.target.value);
+                pideAsync(ev.target.value);
             })
         }
         //pide(1)
-        pideFecth(1);
+        //pideFecth(1);
+        for (let p of document.querySelectorAll('.fotos')) {
+            p.addEventListener('click', async ev => {
+                document.querySelector('#loading').hidden = false;
+                const response = await fetch('https://httpbin.org/image/' + ev.target.value);
+                if (response.ok) {
+                    const miBlob = await response.blob();
+                    document.querySelector('#foto').src = URL.createObjectURL(miBlob);
+                } else {
+                    console.error('Error ' + response.status + ': ' + response.statusText);
+                }
+                document.querySelector('#loading').hidden = true;
+            })
+        }
     </script>
 </body>
 
