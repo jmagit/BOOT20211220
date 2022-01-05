@@ -110,8 +110,8 @@ function Calculadora(fnPantalla, fnResumen) {
 		miResumen = value == '=' ? '' : (`${acumulado} ${value}`);
 		// Number: double-precision IEEE 754 floating point.
 		// 9.9 + 1.3, 0.1 + 0.2, 1.0 - 0.9
-		// miPantalla = parseFloat(acumulado.toPrecision(15)).toString();
-		miPantalla = acumulado.toString();
+		miPantalla = parseFloat(acumulado.toPrecision(15)).toString();
+		// miPantalla = acumulado.toString();
 		pintaPantalla();
 		pintaResumen();
 		operador = value;
