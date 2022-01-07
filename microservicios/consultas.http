@@ -1,0 +1,57 @@
+get http://localhost:4321/api/contactos?_page=0&_rows=5
+###
+get http://localhost:4321/api/contactos/111
+###
+post http://localhost:4321/api/contactos
+Content-Type: application/json
+
+{
+  "id": 1,
+  "tratamiento": "Sra.",
+  "nombre": "Marline",
+  "apellidos": "Lockton Jerrans",
+  "telefono": "846054444",
+  "email": "mjerrans0@de.vu",
+  "sexo": "M",
+  "nacimiento": [
+    1973,
+    7,
+    9
+  ],
+  "avatar": "https://randomuser.me/api/portraits/women/1.jpg",
+  "conflictivo": true
+}
+
+###
+put http://localhost:4321/api/contactos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "tratamiento": "Sra.",
+  "nombre": "Marline",
+  "apellidos": "Lockton Jerrans",
+  "telefono": "846 054444",
+  "email": "mjerrans0@de.vu",
+  "sexo": "M",
+  "nacimiento": [
+    1973,
+    7,
+    9
+  ],
+  "avatar": "https://randomuser.me/api/portraits/women/1.jpg",
+  "conflictivo": true
+}
+
+###
+delete http://localhost:4321/api/contactos/112
+
+###
+get http://localhost:4321/api/contactos?_page=count
+
+###
+get http://localhost:4321/api/contactos?_page=1&_rows=5
+
+###
+
+get http://localhost:4321/contacto/1
