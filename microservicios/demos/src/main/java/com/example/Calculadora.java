@@ -19,4 +19,8 @@ public class Calculadora {
 		return a - b;
 	}
 	
+	public String toFalso() {
+		return "Calculadora [toString()=" + super.toString() + "]";
+	}
+	
 }

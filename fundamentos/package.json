@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx eslint",
     "test": "karma",
-    "lint": "npx eslint"
+    "lint": "npx eslint **/*.js"
   },
   "author": "Javier",
   "license": "MIT",
@@ -14,6 +14,6 @@
     "@fortawesome/fontawesome-free": "^5.15.4"
   },
   "devDependencies": {
-    "eslint": "^8.5.0"
+    "eslint": "^8.6.0"
   }
 }
