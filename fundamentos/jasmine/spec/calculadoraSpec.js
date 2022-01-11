@@ -1,27 +1,30 @@
 describe('Pruebas de las calculadora', () => {
     let calc = null;
 
+    beforeEach(() => {
+        calc = new Calculadora();        
+    });
+
     xit('Este esta pendiente', () => {
         fail('Pendiente')
     });
 
-    beforeEach(() => {
-        calc = new Calculadora();
-        
-    });
-
     describe('Sumas', () => {
+
         describe('OK', () => {
+
             it('Positivos', () => {
                 // let calc = new Calculadora();
                 let rslt = calc.suma(2, 2);
                 expect(4).toBe(rslt);
             })
+
             it('Cadenas', () => {
                 // let calc = new Calculadora();
                 let rslt = calc.suma('2', 2);
                 expect(4).toBe(rslt);
             })
+
             it('Cero', () => {
                 // let calc = new Calculadora();
                 let rslt = calc.suma(0, 0);
@@ -29,12 +32,14 @@ describe('Pruebas de las calculadora', () => {
             })
 
         })
+
         describe('KO', () => {
             it('No números', () => {
                 let calc = new Calculadora();
                 let rslt = calc.suma('a', 2);
                 expect(rslt).toBeNaN();
             })
+
             it('No valores', () => {
                 let calc = new Calculadora();
                 let rslt = calc.suma('a', 2);
@@ -42,6 +47,7 @@ describe('Pruebas de las calculadora', () => {
             })
 
         })
+
         describe('Generado', function () {
             [[1, 2, 3], [2, 2, 4], [3, -2, 1]].forEach(item => {
                 it(`Prueba que ${item[0]} mas ${item[1]} es ${item[2]}`, () => 
@@ -55,14 +61,17 @@ describe('Pruebas de las calculadora', () => {
             });
 
         });
+
         fdescribe('Doble', () => {
-            it('Positivos', () => {
+
+            it('Fake', () => {
                 // let calc = new Calculadora();
                 let fake = spyOn(calc, 'suma').and.returnValue(3);
                 let rslt = calc.suma(2, 2);
                 expect(fake).toHaveBeenCalled();
                 expect(3).toBe(rslt);
             })
+
         })
 
     
@@ -70,9 +79,9 @@ describe('Pruebas de las calculadora', () => {
 
     it('Multiplica', () => {
         let calc = { multiplica: (a, b) => 4 };
+
        expect(4).toBe(calc.multiplica(5,5));
     })
-
 })
 
 describe('Asincronos', () => {
@@ -86,6 +95,7 @@ describe('Asincronos', () => {
             fail('Error ' + response.status + ': ' + response.statusText)
         }
     })
+    
     it('asincrono fetch', done => {
         const page = 1
         fetch(`https://picsum.photos/v2/list?page=${page}&limit=10`).then(response => {
@@ -94,9 +104,11 @@ describe('Asincronos', () => {
                     expect(10).toBe(lst.length);
                     done();
                 }
-                );
+                ).catch(() => done.fail());
+            } else {
+                done.fail()
             }
-        })
+        }).catch(() => done.fail());
 
     })
 })
