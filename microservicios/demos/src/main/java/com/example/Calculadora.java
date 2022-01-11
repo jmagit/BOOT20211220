@@ -8,7 +8,7 @@ public class Calculadora {
 		return a / b;
 	}
 	public int divide(int a, int b) {
-		assert b != 0;
+		// assert b != 0;
 		return a / b;
 	}
 	@Override

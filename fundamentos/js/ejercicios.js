@@ -178,7 +178,7 @@ export class JuegoConClase {
         this.intentos = 0;
         this.encontrado = false;
         this.mensaje = 'Listo para jugar';
-    };
+    }
     PruebaCon(numeroIntroducido) {
         if (this.intentos >= this.#maxIntentos)
             throw new Error("Excedido el numero de intentos");
@@ -200,11 +200,11 @@ export class JuegoConClase {
         }
         this.mensaje = 'Mi número es menor.';
         return this.mensaje;
-    };
+    }
 
     DameMaxIntentos() { return this.#maxIntentos; }
 
-    get maxIntentos() { return this.#maxIntentos; };
+    get maxIntentos() { return this.#maxIntentos; }
 
     get intento() { return this.intentos + 1; }
 }

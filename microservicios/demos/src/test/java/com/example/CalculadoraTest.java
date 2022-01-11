@@ -123,8 +123,8 @@ class CalculadoraTest {
 		var cad = calc.toString();
 		assertNotNull(cad);
 		assertAll("Cadenas", 
-				() -> assertTrue(cad.length() > 100, "long min"),
-				() -> assertTrue(cad.contains("calc"), "Contiene cad")
+				() -> assertTrue(cad.length() > 10, "long min"),
+				() -> assertTrue(cad.contains("Calc"), "Contiene cad")
 			);
 		
 	}
