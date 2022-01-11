@@ -2,7 +2,7 @@
 import { primosGenerator, primosIterator } from './biblioteca/index.js'
 
 export function saluda(nom) {
-    debugger;
+    // debugger;
     return "Hola " + nom;
 }
 
@@ -108,7 +108,7 @@ export function esNIF(nif) {
 
 export function esPalindromo(cadena) {
     if (typeof (cadena) != "string" || cadena.trim().length == 0) return false;
-    cadena = cadena.replace(/[ .,;:#¿?¡!()\[\]{}=+\-\*\/_`~$%\^&'"]/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    cadena = cadena.replace(/[ .,;:#¿?¡!()[\]{}=+\-*/_`~$%^&'"]/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase();
     for (let i = 0; i < cadena.length - i; i++) {
         if (cadena.charAt(i) !== cadena.charAt(cadena.length - 1 - i)) return false;
     }
