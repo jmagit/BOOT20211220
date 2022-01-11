@@ -115,9 +115,9 @@ export function esPalindromo(cadena) {
     return true;
 }
 
-export function estaEnMayuscula(valor) {
+export function esMayusculas(valor) {
     if(!valor) return true;
-    return valor.toString().toUpperCase() === valor;
+    return valor.toString().toUpperCase() == valor;
 }
 
 export default function Juego(maxIntentos, valores) {

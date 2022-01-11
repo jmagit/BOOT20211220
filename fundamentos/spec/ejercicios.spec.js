@@ -1,6 +1,6 @@
 import { primosGenerator, primosIterator } from '../js/biblioteca/index.js';
 import Juego, { aleatorio, JuegoDelNumero, dameArray, damePrimos, 
-    esNIF, esPalindromo, JuegoConClase } from '../js/ejercicios.js';
+    esNIF, esPalindromo, JuegoConClase, esMayusculas } from '../js/ejercicios.js';
 
 describe('Verificación de los ejercicios de JavaScript', () => {
     describe('Ejercicio 1: Crear una función que devuelva un numero aleatorio', () => {
@@ -59,9 +59,9 @@ describe('Verificación de los ejercicios de JavaScript', () => {
 
     describe(`Ejercicio 2: Adivina el Número con interfaz`, () => {
         it('Menor Mayor Igual.', () => {
+            spyOn(Math, 'random').and.returnValue(0.50)
             const promptSpy = spyOn(window, 'prompt').and.returnValues('49', '51', '50' )
             const alertSpy = spyOn(window, 'alert').and.stub()
-            spyOn(Math, 'random').and.returnValue(0.50)
 
             JuegoDelNumero();
 
@@ -273,4 +273,19 @@ describe('Verificación de los ejercicios de JavaScript', () => {
             })
         });
     });
+
+    describe('Ejercicio TDD: Crear una función que valide si es mayúsculas.', () => {
+        ['A', 'ABCDE', 'CIUDAD REAL', 1234, null, undefined, ''].forEach(caso => {
+            it(`OK: '${caso}'`, () => {
+                expect(esMayusculas(caso)).toBeTrue()
+            })
+        });
+
+        ['a', 'CASi', 'abcd'].forEach(caso => {
+            it(`KO: '${caso}'`, () => {
+                expect(esMayusculas(caso)).toBeFalse()
+            })
+        });
+    });
+
 })
