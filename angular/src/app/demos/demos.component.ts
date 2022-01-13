@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Unsubscribable } from 'rxjs';
 import { NotificationService, NotificationType } from '../common-services';
 
