@@ -9,14 +9,17 @@ import { AppComponent } from './app.component';
 import { CommonComponentModule } from './common-component';
 import { MainModule } from './main';
 import { SecurityModule } from './security';
+import { DemosComponent } from './demos/demos.component';
+import { CommonServicesModule } from './common-services';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DemosComponent
   ],
   imports: [
     BrowserModule, FormsModule,
-    MainModule, SecurityModule, CommonComponentModule, MyCoreModule,
+    MainModule, CommonServicesModule, CommonComponentModule, SecurityModule, MyCoreModule,
     AppRoutingModule,
   ],
   providers: [
