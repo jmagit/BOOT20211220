@@ -6,7 +6,7 @@ export const ERROR_LEVEL = new InjectionToken<string>('ERROR_LEVEL');
 export class LoggerService {
   private level: number = 99;
 
-  constructor(@Optional() @Inject(ERROR_LEVEL) level: number) {
+  constructor(@Optional() @Inject(ERROR_LEVEL) level?: number) {
     if(level != null)
       this.level = level;
   }
