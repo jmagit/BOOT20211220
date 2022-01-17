@@ -1,0 +1,42 @@
+<p>
+  <input type="button" value="add" (click)="add()">
+  <input type="button" value="edit" (click)="edit(1)">
+</p>
+<form #miForm="ngForm">
+  <p>
+    Código:
+    <ng-container *ngIf="isAdd">
+      <input type="number" id="id" name="id" [(ngModel)]="elemento.id" #id="ngModel" required>
+      <output class="error" [hidden]="!id.hasError('required') || miForm.pristine">Es obligatorio</output>
+    </ng-container>
+    <ng-container *ngIf="!isAdd">
+      {{elemento.id}}
+    </ng-container>
+    <br>
+    Nombre:
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel"
+      required minlength="2" maxlength="10">
+    <output class="error" [hidden]="!nombre.hasError('required')">Es obligatorio</output>
+    <output class="error" [hidden]="!nombre.hasError('minlength') && !nombre.hasError('maxlength')">
+      Debe tener entre 2 y 10 letras
+    </output>{{nombre.errors | json}}
+    <br>
+    Apellidos:
+    <input type="text" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel"
+      minlength="2" maxlength="10">
+    <output class="error" [hidden]="!apellidos.hasError('minlength') && !apellidos.hasError('maxlength')">
+      Debe tener entre 2 y 10 letras
+    </output>
+    <br>
+    Edad:
+    <input type="number" id="edad" name="edad" [(ngModel)]="elemento.edad" #edad="ngModel"
+      min="16" max="67">
+    <output class="error" [hidden]="!edad.hasError('min') && !edad.hasError('max')">
+      Debe tener entre 16 y 67 años
+    </output>{{edad.errors | json}}
+  </p>
+  <p>
+    <input type="button" value="enviar" (click)="send()" [disabled]="miForm.invalid">
+    <input type="button" value="volver" (click)="cancel()">
+  </p>
+</form>

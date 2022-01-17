@@ -82,3 +82,5 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, laudantium volupt
 <p [style.font-size.px]="fontSize">
   {{listado | json}}
 </p>
+<app-form-buttons (send)="ponResultado('send', 0)" [send-text]="'aceptar'"
+  (cancel)="ponResultado('cancel', 0)" (delete)="ponResultado('delete', 0)" ></app-form-buttons>
