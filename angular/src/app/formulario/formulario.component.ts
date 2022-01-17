@@ -5,6 +5,8 @@ export class Persona {
   nombre: string | null = null;
   apellidos: string | null = null;
   edad: number | null = null;
+  nif: string | null = null;
+  email: string | null = null;
 }
 
 @Component({
@@ -26,7 +28,7 @@ export class FormularioComponent implements OnInit {
     this.isAdd = true;
   }
   edit(id: number): void {
-    this.elemento = { id, nombre: 'Pepitooooooooooooooooooo', apellidos: 'Grillo', edad: 99 }
+    this.elemento = { id, nombre: 'Pepito', apellidos: 'Grillo', edad: 66, nif: null, email: 'pepito@grillo' }
     this.isAdd = false;
   }
   send(): void {
