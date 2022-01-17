@@ -2,27 +2,27 @@ import { Directive, ElementRef } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
 
 
-export function enmayusculas(): ValidatorFn {
+export function EsMayusculas(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
       if (!control.value) { return null; }
       if(control.value.toLocaleUpperCase() === control.value)
         return null;
       else
-        return { enmayusculas: 'Tiene que estar en mayúsculas' }
+        return { esmayusculas: 'Tiene que estar en mayúsculas' }
   };
 }
 
 @Directive({
-  selector: '[enmayusculas][formControlName],[enmayusculas][formControl],[enmayusculas][ngModel]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: EnMayusculasValidator, multi: true }]
+  selector: '[esmayusculas][formControlName],[esmayusculas][formControl],[esmayusculas][ngModel]',
+  providers: [{ provide: NG_VALIDATORS, useExisting: EsMayusculasValidator, multi: true }]
 })
-export class EnMayusculasValidator implements Validator {
+export class EsMayusculasValidator implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
-      return enmayusculas()(control);
+      return EsMayusculas()(control);
   }
 }
 
-export function NIFValidator(): ValidatorFn {
+export function EsNIF(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
       if (!control.value) { return null; }
       const err = { nif: { invalidFormat: true, invalidChar: true } };
@@ -36,11 +36,11 @@ export function NIFValidator(): ValidatorFn {
 }
 @Directive({
   selector: '[nif][formControlName],[nif][formControl],[nif][ngModel]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: NIFValidatorDirective, multi: true }]
+  providers: [{ provide: NG_VALIDATORS, useExisting: NIFValidator, multi: true }]
 })
-export class NIFValidatorDirective implements Validator {
+export class NIFValidator implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
-      return NIFValidator()(control);
+      return EsNIF()(control);
   }
 }
 
@@ -64,4 +64,4 @@ export class TypeValidator implements Validator {
   }
 }
 
-export const MIS_VALIDADORES = [EnMayusculasValidator, NIFValidatorDirective, TypeValidator]
+export const MIS_VALIDADORES = [EsMayusculasValidator, NIFValidator, TypeValidator]
