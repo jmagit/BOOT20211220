@@ -25,7 +25,7 @@ export class EsMayusculasValidator implements Validator {
 export function EsNIF(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
       if (!control.value) { return null; }
-      const err = { nif: { invalidFormat: true, invalidChar: true } };
+      const err = { nif: { invalidFormat: true, invalidChar: true, message: 'No es un nif valido' } };
       if (/^\d{1,8}\w$/.test(control.value)) {
           const letterValue = control.value.substr(control.value.length - 1);
           const numberValue = control.value.substr(0, control.value.length - 1);
