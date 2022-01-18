@@ -15,13 +15,13 @@
     <br>
     Nombre:
     <input type="text" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel"
-      notblank minlength="2" maxlength="10" >
+      notblank minlength="2" maxlength="10" esmayusculas>
     <output class="error" [show]="nombre.hasError('required')">Es obligatorio</output>
-    <output class="error" [hidden]="!nombre.hasError('minlength') && !nombre.hasError('maxlength')">
+    <output class="error" [show]="nombre.hasError('minlength') || nombre.hasError('maxlength')">
       Debe tener entre 2 y 10 letras
     </output>{{nombre.errors | json}}
     <!-- <app-show-errors-messages [errors]="nombre.errors"></app-show-errors-messages> -->
-    <!-- <output class="error" [myShowErrors]="nombre.errors"></output> -->
+    <output [myShowErrors]="nombre.errors"></output>
     <br>
     Apellidos:
     <input type="text" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel"
