@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 import { HomeComponent } from './home/home.component';
-
+import { AjaxWaitComponent } from './ajax-wait';
 
 
 @NgModule({
   declarations: [
-    NotificationComponent, NotificationModalComponent, HomeComponent,
+    NotificationComponent, NotificationModalComponent, HomeComponent, AjaxWaitComponent,
   ],
   exports: [
-    NotificationComponent, NotificationModalComponent, HomeComponent,
+    NotificationComponent, NotificationModalComponent, HomeComponent, AjaxWaitComponent,
   ],
   imports: [
     CommonModule

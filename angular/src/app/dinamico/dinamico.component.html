@@ -2,21 +2,24 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><img src="assets/logo.svg" width="120" alt="Logotipo"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item" *ngFor="let item of menu; let indice=index;" >
-            <button class="btn btn-link nav-link" [class.active]="item.componente === actual"
-              type="button" (click)="seleccionar(indice)" ><i class="fas fa-{{item.icono}}"></i> {{item.texto}}</button>
+          <li class="nav-item" *ngFor="let item of menu; let indice=index;">
+            <button class="btn btn-link nav-link" [class.active]="item.componente === actual" type="button"
+              (click)="seleccionar(indice)"><i class="fas fa-{{item.icono}}"></i> {{item.texto}}</button>
           </li>
         </ul>
+      <app-login></app-login>
       </div>
     </div>
   </nav>
 </header>
 <app-notification></app-notification>
+<app-ajax-wait></app-ajax-wait>
 <main class="container-fluid">
   <ng-container *ngComponentOutlet="actual"></ng-container>
 </main>

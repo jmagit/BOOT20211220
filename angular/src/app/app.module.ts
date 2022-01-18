@@ -12,14 +12,14 @@ import { ERROR_LEVEL, LoggerService, MyCoreModule } from 'src/lib/my-core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonComponentModule } from './common-component';
-import { MainModule } from './main';
-import { SecurityModule } from './security';
+import { AjaxWaitInterceptor, MainModule } from './main';
+import { AuthInterceptor, SecurityModule } from './security';
 import { DemosComponent } from './demos/demos.component';
 import { CommonServicesModule } from './common-services';
 import { DinamicoComponent } from './dinamico/dinamico.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './formulario/formulario.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoggerService,
     { provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL  },
     { provide: LOCALE_ID, useValue: 'es-ES'},
+    { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
   ],
   bootstrap: [AppComponent]
 })

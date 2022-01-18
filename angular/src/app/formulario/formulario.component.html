@@ -48,8 +48,8 @@
       {{email.getError('type')}}
     </output>{{email.errors | json}}
   </p>
-  <p>
-    <input type="button" value="enviar" (winConfirm)="send()" winConfirmMessage='Los datos ....' [disabled]="miForm.invalid" >
+  <p> <!-- (winConfirm)="send()" winConfirmMessage='Los datos ....' -->
+    <input type="button" value="enviar" (click)="send()" [disabled]="miForm.invalid" >
     <input type="button" value="volver" (click)="cancel()">
   </p>
 </form>
