@@ -1,6 +1,7 @@
 <p>
   <input type="button" value="add" (click)="add()">
   <input type="button" value="edit" (click)="edit(1)">
+  <input type="button" value="listado" (click)="list()">
 </p>
 <form #miForm="ngForm">
   <p>
@@ -52,3 +53,10 @@
     <input type="button" value="volver" (click)="cancel()">
   </p>
 </form>
+
+<ul>
+  <li *ngFor="let item of listado">
+   <button class="btn btn-link" type="button" (click)="edit(item.id)">{{item.nombre}} {{item.apellidos}}</button>
+
+  </li>
+</ul>

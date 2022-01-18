@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { NotificationService, NotificationType } from '../common-services';
 
 export class Persona {
   id: number | null = null;
@@ -16,9 +19,11 @@ export class Persona {
 })
 export class FormularioComponent implements OnInit {
   elemento: Persona = new Persona();
+  listado: Array<Persona> = [];
+
   isAdd: boolean = true;
 
-  constructor() { }
+  constructor(private http: HttpClient, private notify: NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -27,11 +32,40 @@ export class FormularioComponent implements OnInit {
     this.elemento = new Persona();
     this.isAdd = true;
   }
-  edit(id: number): void {
-    this.elemento = { id, nombre: 'Pepito', apellidos: 'Grillo', edad: 66, nif: null, email: 'pepito@grillo' }
-    this.isAdd = false;
+  edit(id: number | null): void {
+    this.http.get<Persona>(environment.apiURL + 'personas/' + id)
+      .subscribe({
+        next: data => {
+          this.elemento = data;
+          this.isAdd = false;
+        },
+        error: err => this.notify.add(err.message)
+      });
+    // this.elemento = { id, nombre: 'Pepito', apellidos: 'Grillo', edad: 66, nif: null, email: 'pepito@grillo' }
+    // this.isAdd = false;
+  }
+  list() {
+    this.http.get<Array<Persona>>(environment.apiURL + 'personas')
+      .subscribe({
+        next: data => {
+          this.listado = data;
+        },
+        error: err => this.notify.add(err.message)
+      });
   }
   send(): void {
+    if(this.isAdd)
+    this.http.post<Persona>(environment.apiURL + 'personas', this.elemento)
+    .subscribe({
+      next: data => this.notify.add('OK', NotificationType.warn),
+      error: err => this.notify.add(err.message)
+    });
+    else
+    this.http.put<Persona>(environment.apiURL + 'personas/' + this.elemento.id, this.elemento)
+    .subscribe({
+      next: data => this.notify.add('OK', NotificationType.warn),
+      error: err => this.notify.add(err.message)
+    });
     alert(`Enviar ${this.isAdd? 'nuevo':'modificación'}: ${JSON.stringify(this.elemento)}`)
   }
   cancel(): void {
