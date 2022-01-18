@@ -22,3 +22,6 @@ form .ng-invalid-parse {
   transition: all linear 1s;
 }
 
+.pressed {
+  font-size: 2em;
+}

@@ -64,4 +64,19 @@ export class TypeValidator implements Validator {
   }
 }
 
-export const MIS_VALIDADORES = [EsMayusculasValidator, NIFValidator, TypeValidator]
+export function NotBlankValidation(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+     return control.value?.trim() ? null : { notblank: 'No puede estar en blanco' }
+  };
+}
+
+@Directive({
+  selector: '[notblank]',
+  providers: [{ provide: NG_VALIDATORS, useExisting: NotBlankValidator, multi: true }]
+})
+export class NotBlankValidator implements Validator {
+  validate(control: AbstractControl): ValidationErrors | null {
+    return NotBlankValidation()(control);
+  }
+}
+export const MIS_VALIDADORES = [EsMayusculasValidator, NIFValidator, TypeValidator, NotBlankValidator]

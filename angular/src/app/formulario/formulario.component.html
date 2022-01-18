@@ -9,21 +9,23 @@
       <input type="number" id="id" name="id" [(ngModel)]="elemento.id" #id="ngModel" required>
       <output class="error" [hidden]="!id.hasError('required') || miForm.pristine">Es obligatorio</output>
     </ng-container>
-    <ng-container *ngIf="!isAdd">
+    <ng-container *myUnless="isAdd">
       {{elemento.id}}
     </ng-container>
     <br>
     Nombre:
     <input type="text" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel"
-      required minlength="2" maxlength="10" esmayusculas>
-    <output class="error" [hidden]="!nombre.hasError('required')">Es obligatorio</output>
+      notblank minlength="2" maxlength="10" >
+    <output class="error" [show]="nombre.hasError('required')">Es obligatorio</output>
     <output class="error" [hidden]="!nombre.hasError('minlength') && !nombre.hasError('maxlength')">
       Debe tener entre 2 y 10 letras
     </output>{{nombre.errors | json}}
+    <!-- <app-show-errors-messages [errors]="nombre.errors"></app-show-errors-messages> -->
+    <!-- <output class="error" [myShowErrors]="nombre.errors"></output> -->
     <br>
     Apellidos:
     <input type="text" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel"
-      minlength="2" maxlength="10" esmayusculas>
+      minlength="2" maxlength="10" >
     <output class="error" [hidden]="!apellidos.hasError('minlength') && !apellidos.hasError('maxlength')">
       Debe tener entre 2 y 10 letras
     </output>
@@ -46,7 +48,7 @@
     </output>{{email.errors | json}}
   </p>
   <p>
-    <input type="button" value="enviar" (click)="send()" [disabled]="miForm.invalid">
+    <input type="button" value="enviar" (winConfirm)="send()" winConfirmMessage='Los datos ....' [disabled]="miForm.invalid" >
     <input type="button" value="volver" (click)="cancel()">
   </p>
 </form>
