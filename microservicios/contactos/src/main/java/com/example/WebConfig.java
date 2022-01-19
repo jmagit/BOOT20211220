@@ -1,8 +1,11 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
@@ -39,5 +42,18 @@ public class WebConfig implements WebFluxConfigurer {
 				.GET("/person", RequestPredicates.accept(MediaType.APPLICATION_JSON), handler::getAll)
 //		    .POST("/person", handler::createPerson)
 				.build();
+	}
+	
+	@Bean
+	public RouterFunction<ServerResponse> htmlRouter(
+	  @Value("classpath:/public/index.html") Resource html) {
+	    return RouterFunctions.route(RequestPredicates.GET("/"), request
+	      -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).syncBody(html)
+	    );
+	}
+	
+	@Bean
+	RouterFunction<ServerResponse> staticResourceRouter(){
+	    return RouterFunctions.resources("/**", new ClassPathResource("public/"));
 	}
 }
