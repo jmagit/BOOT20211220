@@ -7,6 +7,8 @@ import { AjaxWaitComponent } from './ajax-wait';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SecurityModule } from '../security';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -19,7 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HeaderComponent, FooterComponent, PageNotFoundComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule, SecurityModule, RouterModule.forChild([]),
   ]
 })
 export class MainModule {

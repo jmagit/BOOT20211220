@@ -3,14 +3,8 @@
   <div class="col-xs-12 col-sm-6 col-md-6">
       <div class="well well-sm">
           <div class="row">
-              <div class="col-sm-6 col-md-4">
-                  <img src="{{VM.Elemento.avatar}}"
-                        alt="Foto de {{VM.Elemento.nombre}} {{VM.Elemento.apellidos}}" class="rounded" />
-              </div>
               <div class="col-sm-6 col-md-8">
-                  <h4>{{VM.Elemento.tratamiento}} {{VM.Elemento.nombre}} {{VM.Elemento.apellidos}}</h4>
-                  <p [hidden]="!VM.Elemento.conflictivo"><small class="text-danger">
-                        <i class="fas fa-skull-crossbones mr-2"></i>Persona conflictiva</small></p>
+                  <h4>{{VM.Elemento.titulo}}</h4>
                   <p>
                       <i class="fas fa-phone-alt mr-2"></i>{{VM.Elemento.telefono}}
                       <br />
