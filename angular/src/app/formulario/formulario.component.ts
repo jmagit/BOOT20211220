@@ -11,6 +11,7 @@ export class Persona {
   edad: number | null = null;
   nif: string | null = null;
   email: string | null = null;
+  telefonos: Array<string> = [];
 }
 
 @Component({
@@ -71,5 +72,12 @@ export class FormularioComponent implements OnInit {
   }
   cancel(): void {
 
+  }
+
+  addChild(col: Array<any>, value: any) {
+    col.push(value);
+  }
+  delChild(col: Array<any>, index: number) {
+    col.splice(index, 1);
   }
 }

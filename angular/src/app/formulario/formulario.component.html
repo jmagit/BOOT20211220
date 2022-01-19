@@ -48,6 +48,14 @@
       {{email.getError('type')}}
     </output>{{email.errors | json}}
   </p>
+    <input type="button" value="add" (click)="addChild(elemento.telefonos, '')">
+    <ul>
+      <li *ngFor="let tel of elemento.telefonos; let indice=index;">
+        <input [(ngModel)]="elemento.telefonos[indice]" [ngModelOptions]="{standalone: true}" notblank>
+      <input type="button" value="del" (click)="delChild(elemento.telefonos, indice)">
+
+      </li>
+    </ul>
   <p> <!-- (winConfirm)="send()" winConfirmMessage='Los datos ....' -->
     <input type="button" value="enviar" (click)="send()" [disabled]="miForm.invalid" >
     <input type="button" value="volver" (click)="cancel()">
