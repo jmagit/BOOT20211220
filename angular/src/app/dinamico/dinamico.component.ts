@@ -3,7 +3,7 @@ import { CalculadoraComponent } from '../calculadora/calculadora.component';
 import { ContactosComponent } from '../contactos';
 import { DemosComponent } from '../demos/demos.component';
 import { FormularioComponent } from '../formulario/formulario.component';
-import { LibrosComponent } from '../contactos copy';
+import { LibrosComponent } from '../libros';
 import { HomeComponent } from '../main';
 
 @Component({

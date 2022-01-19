@@ -21,7 +21,7 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ContactosModule } from './contactos';
-import { LibrosModule } from './contactos copy';
+import { LibrosModule } from './libros';
 
 @NgModule({
   declarations: [
