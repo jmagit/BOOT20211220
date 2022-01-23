@@ -6,6 +6,7 @@ import { DemosComponent } from './demos/demos.component';
 import { LibrosComponent } from './libros';
 import { HomeComponent, PageNotFoundComponent } from './main';
 import { AuthGuard } from './security';
+import { UploadComponent } from './upload/upload.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: ':id/:kk', component: LibrosComponent},
   ]},
   { path: 'config', loadChildren: () => import('./config/config.module').then(mod => mod.ConfigModule)},
+  { path: 'upload', component: UploadComponent},
   { path: '404.html', component: PageNotFoundComponent},
   { path: '**', component: PageNotFoundComponent},
 ];

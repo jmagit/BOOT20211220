@@ -22,6 +22,8 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ContactosModule } from './contactos';
 import { LibrosModule } from './libros';
+import { UploadComponent } from './upload/upload.component';
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,13 @@ import { LibrosModule } from './libros';
     DemosComponent,
     DinamicoComponent,
     CalculadoraComponent,
-    FormularioComponent
+    FormularioComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     MainModule, CommonServicesModule, CommonComponentModule, SecurityModule, MyCoreModule,
-    AppRoutingModule, ContactosModule, LibrosModule,
+    AppRoutingModule, ContactosModule, LibrosModule, FileUploadModule,
   ],
   providers: [
     LoggerService,
