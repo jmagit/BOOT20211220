@@ -96,6 +96,7 @@ describe('Pruebas aisladas de la calculadora', () => {
 	describe('Método: borrar', () => {
 		it('Borra positivo', () => {
 			calc.ponOperando('321')
+			expect(calc.Pantalla).toBe('321')
 			calc.borrar()
 			expect(calc.Pantalla).toBe('32')
 			calc.borrar()
@@ -106,6 +107,7 @@ describe('Pruebas aisladas de la calculadora', () => {
 
 		it('Borra negativo', () => {
 			calc.ponOperando('-123')
+			expect(calc.Pantalla).toBe('-123')
 			calc.borrar()
 			expect(calc.Pantalla).toBe('-12')
 			calc.borrar()

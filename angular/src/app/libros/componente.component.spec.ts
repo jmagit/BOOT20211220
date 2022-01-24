@@ -6,15 +6,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoggerService } from 'src/lib/my-core';
 import { NotificationService } from '../common-services';
 
-import { ContactosComponent } from './componente.component';
+import { LibrosComponent } from './componente.component';
 
-describe('ContactosComponent', () => {
-  let component: ContactosComponent;
-  let fixture: ComponentFixture<ContactosComponent>;
+describe('LibrosComponent', () => {
+  let component: LibrosComponent;
+  let fixture: ComponentFixture<LibrosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContactosComponent ],
+      declarations: [ LibrosComponent ],
       providers: [ NotificationService, LoggerService ],
       imports: [ HttpClientTestingModule, RouterTestingModule, FormsModule ],
       schemas: [ NO_ERRORS_SCHEMA ]
@@ -23,7 +23,7 @@ describe('ContactosComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContactosComponent);
+    fixture = TestBed.createComponent(LibrosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
